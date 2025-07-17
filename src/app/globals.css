@@ -1,8 +1,10 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #171717;
+  --font-spacegrotesk: 'Space Grotesk', Arial, Helvetica, sans-serif;
 }
 
 @theme inline {
@@ -10,17 +12,45 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-spacegrotesk: var(--font-spacegrotesk);
+}
+
+.font-spacegrotesk {
+  font-family: var(--font-spacegrotesk);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ededed;
+    --foreground: #171717;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-spacegrotesk), 'Space Grotesk', Arial, Helvetica,
+    sans-serif;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  min-width: 100%;
+  animation: marquee 18s linear infinite;
+}
+.marquee-text {
+  display: inline-block;
+  color: #171717;
+  font-size: 6vw;
+  font-weight: bold;
+  letter-spacing: 0.05em;
 }
