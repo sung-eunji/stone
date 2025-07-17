@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Header() {
+  const { data: session } = useSession();
+
   return (
     <header className="w-full border-b border-gray-200 py-4 mb-8 bg-transparent">
       <div className="container mx-auto flex justify-between items-center px-4">
@@ -25,9 +30,28 @@ export default function Header() {
           <Link href="/cart" className="hover:underline">
             Cart
           </Link>
-          <Link href="/signin" className="hover:underline">
-            Sign In
-          </Link>
+          {session ? (
+            <>
+              <Link href="/mypage" className="hover:underline">
+                마이페이지
+              </Link>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="hover:underline"
+              >
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/signup" className="hover:underline">
+                Sign Up
+              </Link>
+              <Link href="/signin" className="hover:underline">
+                Sign In
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </header>
